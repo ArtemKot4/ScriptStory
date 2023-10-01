@@ -1,0 +1,2 @@
+include ':java'
+project(':java').projectDir = file('C:\\Users\\Пользователь\\Desktop\\Продвинутое создание модов\\Galacticraft 4 PE developing\\src\\java')
