@@ -6,13 +6,13 @@ ScriptStory/toolchain/bin
 ScriptStory/toolchain/python
 
 ScriptStory/output
-ScriptStory/.idea
-ScriptStory/.settings
+ScriptStory/idea
+ScriptStory/settings
 **/__pycache__
 **/tsconfig.jsons
 
 *.bat
 *.log
 *.icmod
-.vscode
+ScriptStory/vscode
 
