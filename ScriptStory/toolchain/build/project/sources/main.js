@@ -7,10 +7,7 @@ function questRegistry(name, isActive) {
         }
     }
 }
-function dialogRegistry(dialog, 
-// previousquest: string | null,
-// nextquest: string | null,
-question, first, second, third, isActive, talker, quest) {
+function dialogRegistry(dialog, question, first, second, third, isActive, talker, quest) {
     quest = quest || null;
     dialogs.push({
         dialog: dialog,
