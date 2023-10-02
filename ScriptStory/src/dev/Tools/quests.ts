@@ -9,9 +9,7 @@ function questRegistry(name: string, isActive: boolean): void {
 }
 
 function dialogRegistry(
-  dialog: string,
-  // previousquest: string | null,
-  // nextquest: string | null,
+   dialog: string,
   question: string,
   first: string,
   second: string,
