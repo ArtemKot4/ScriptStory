@@ -1,18 +1,18 @@
-ScriptStory/ScriptStory/toolchain/build
-ScriptStory/ScriptStory/toolchain/temp
-ScriptStory/ScriptStory/toolchain/ndk
-ScriptStory/ScriptStory/toolchain/adb
-ScriptStory/ScriptStory/toolchain/bin
-ScriptStory/ScriptStory/toolchain/python
+/toolchain/build
+/toolchain/temp
+/toolchain/ndk
+/toolchain/adb
+/toolchain/bin
+/toolchain/python
 
-ScriptStory/ScriptStory/output
-ScriptStory/ScriptStory/.idea
-ScriptStory/ScriptStory/.settings
+/output
+/.idea
+/.settings
 **/__pycache__
 **/tsconfig.jsons
 
 *.bat
 *.log
 *.icmod
-ScriptStory/ScriptStory/.vscode
+/.vscode
 
