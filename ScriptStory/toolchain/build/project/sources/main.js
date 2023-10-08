@@ -30,6 +30,10 @@ questRegistry("FirstStep", true);
 dialogRegistry("sinceHistory", "Сделайте свой выбор!", "???", "!!!", "...", true, 1, "FirstStep");
 dialogRegistry("testByGialis", " Ты что делаешь в лесу?", "Заблудился, когда гулял собаку.", "Вышел прогулять собаку.", "Пошёл поохотиться. Собаку потерял.", false, 1, "FirstStep");
 dialogRegistry("Testing", " Тут пусто?", "Да.", "Нет.", "Ура,я не появился без квеста.", false, 0);
+questRegistry("FirstStep", true);
+dialogRegistry("sinceHistory", "А вы уже поставили лайк?", "Конечно!", "Да!", "А где вариант «нет»?", true, 1, "FirstStep");
+dialogRegistry("YaGulialSobaky", " Ты что делаешь в лесу?", "Заблудился, когда гулял собаку.", "Вышел прогулять собаку.", "Пошёл поохотиться. Собаку потерял.", false, 1, "FirstStep");
+dialogRegistry("Testing", " Тут пусто?", "Да.", "Нет.", "Ура,я не появился без квеста.", false, 0);
 var Dialog = new UI.Container();
 var DialogWindow = new UI.Window({
     location: {
@@ -40,25 +44,25 @@ var DialogWindow = new UI.Window({
     },
     drawing: [
         { type: "background", color: android.graphics.Color.argb(0, 0, 0, 0) },
-        { type: "bitmap", bitmap: "dialog_background", scale: 3.5, x: 150, y: 5 },
+        { type: "bitmap", bitmap: "dialog_background", scale: 2.7, x: 50, y: 4 },
     ],
     elements: {
         Question: {
             type: "text",
-            x: 210,
-            y: 90,
+            x: 140,
+            y: 70,
             text: "...",
         },
         Talker: {
             type: "text",
-            x: 210,
-            y: 120,
+            x: 715,
+            y: 285,
             text: "Talker",
         },
         answer_1: {
             type: "text",
-            x: 210,
-            y: 210,
+            x: 150,
+            y: 320,
             text: "1",
             clicker: {
                 onClick: function (container) {
@@ -72,8 +76,8 @@ var DialogWindow = new UI.Window({
         },
         answer_2: {
             type: "text",
-            x: 210,
-            y: 290,
+            x: 150,
+            y: 360,
             text: "2",
             clicker: {
                 onClick: function (container) {
@@ -87,8 +91,8 @@ var DialogWindow = new UI.Window({
         },
         answer_3: {
             type: "text",
-            x: 210,
-            y: 370,
+            x: 150,
+            y: 400,
             text: "3",
             clicker: {
                 onClick: function (container) {
@@ -107,40 +111,39 @@ Callback.addCallback("LocalTick", function (coords, item, block) {
     if (World.getThreadTime() % 160 == 0) {
         alert(JSON.stringify(dialogs));
     }
-    for (var i in dialogs) {
+    for (var i in dialogs // var n in quests
+    ) {
         var dialog = dialogs[i];
+        if (World.getThreadTime() % 5 == 0) {
+            if (dialogs[i].dialog &&
+                dialogs[i].isActive == true) {
+                Dialog.setText("Question", "" + dialog.question);
+                Dialog.setText("answer_1", "" + dialog.first);
+                Dialog.setText("answer_2", "" + dialog.second);
+                Dialog.setText("answer_3", "" + dialog.third);
+                var d = dialogs[0].talker;
+                switch (d) {
+                    case 1:
+                        Dialog.setText("Talker", "First");
+                        break;
+                    case 2:
+                        Dialog.setText("Talker", "Second");
+                    case 3:
+                        Dialog.setText("Talker", "Third");
+                        break;
+                }
+                // alert("Done!");
+            }
+        }
         if (dialogs[0].isActive == false &&
-            dialogs[1] &&
-            quests[0].isActive == true) {
+            dialogs[1]
+        //&& quests[0].isActive == true
+        ) {
             dialogs.shift();
             dialogs[0].isActive = true;
             alert("Диалог изменился!");
         }
         for (var n in quests) {
-            if (World.getThreadTime() % 5 == 0) {
-                if (dialogs[0].dialog &&
-                    dialogs[0].isActive == true &&
-                    quests[0].name == dialogs[0].quest &&
-                    quests[0].isActive == true) {
-                    Dialog.setText("Question", "" + dialog.question);
-                    Dialog.setText("answer_1", "" + dialog.first);
-                    Dialog.setText("answer_2", "" + dialog.second);
-                    Dialog.setText("answer_3", "" + dialog.third);
-                    var d = dialogs[0].talker;
-                    switch (d) {
-                        case 1:
-                            Dialog.setText("Talker", "First");
-                            break;
-                        case 2:
-                            Dialog.setText("Talker", "Second");
-                        case 3:
-                            Dialog.setText("Talker", "Third");
-                        default:
-                            break;
-                    }
-                    alert("Done!");
-                }
-            }
         }
     }
 });

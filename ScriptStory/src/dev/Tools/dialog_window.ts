@@ -1,34 +1,4 @@
-var dialogs = [];
-var quests = [];
-function questRegistry(name, isActive) {
-for (var i in dialogs) {
-for (var n in quests) {
-quests.push({ name: name, isActive: isActive });
-}
-}
-}
-function dialogRegistry(dialog,
-// previousquest: string | null,
-// nextquest: string | null,
-question, first, second, third, isActive, talker, quest) {
-quest = quest || null;
-dialogs.push({
-dialog: dialog,
-// previousquest: previousquest,
-// nextquest: nextquest,
-question: question,
-first: first,
-second: second,
-third: third,
-isActive: isActive,
-talker: talker,
-quest: quest,
-});
-// for(var i in quests){
-// if(quests[i].isActive==false&&quests[i].nextquest){quests[i].quest=quests[i].nextquest;
-// quests[i].isActive==true
-// alert}}
-}
+
 questRegistry("FirstStep", true);
 dialogRegistry("sinceHistory", "А вы уже поставили лайк?", "Конечно!", "Да!", "А где вариант «нет»?", true, 1, "FirstStep");
 dialogRegistry("YaGulialSobaky", " Ты что делаешь в лесу?", "Заблудился, когда гулял собаку.", "Вышел прогулять собаку.", "Пошёл поохотиться. Собаку потерял.", false, 1, "FirstStep");
@@ -107,10 +77,11 @@ alert("debug");
 });
 function buttonFunc() { }
 Callback.addCallback("LocalTick", function (coords, item, block) {
-if (World.getThreadTime() % 160 == 0) {
-alert(JSON.stringify(dialogs));
-}
-for (var i in dialogs) {
+// if (World.getThreadTime() % 160 == 0) {
+// alert(JSON.stringify(dialogs));
+// }
+for (var i in dialogs // var n in quests
+) {
 var dialog = dialogs[i];
 if (World.getThreadTime() % 5 == 0) {
 if (dialogs[i].dialog &&
@@ -154,7 +125,7 @@ Callback.addCallback("ItemUse", function (coords, item, block) {
   }
 });
 Callback.addCallback("EntityInteract", function (entity, player, coords) {
-  if (Entity.getType(entity) == 34) {
+  if (Entity.getTypeName(entity) == "script_story:thomas<>") {
     alert("Работает");
     // Dialog.openAs(DialogWindow);}
   }
