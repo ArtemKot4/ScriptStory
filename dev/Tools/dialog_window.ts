@@ -8,7 +8,7 @@ var DialogWindow = new UI.Window({
   },
   drawing: [
     { type: "background", color: android.graphics.Color.argb(0, 0, 0, 0) },
-    { type: "bitmap", bitmap: "dialog_background", scale: 2.7, x: 50, y: 4 },
+    { type: "bitmap", bitmap: "dialog_background", scale: 2.6, x: 50, y: 3 },
   ],
   elements: {
     Question: {
@@ -127,7 +127,7 @@ Callback.addCallback("ItemUse", function (coords, item, block) {
   };
   if(item.id==VanillaItemID["iron_ingot"]){
     Quest.give("testq")
-    JSON.stringify(Quest.list)
+    Game.message(JSON.stringify(Quest.list))
   }
 });
 Callback.addCallback("EntityInteract", function (entity, player, coords) {

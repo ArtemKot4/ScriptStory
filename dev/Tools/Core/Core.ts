@@ -13,9 +13,10 @@ IMPORT("RenderUtil");
 
 
 Callback.addCallback('LevelDisplayed', function () {
-    Game.message(Translation.translate("§6Best story pack has been downloaded!\n§7Thank's for downloading this modification!\n• You can join in the group of modification: §ahttps://vk.com/horizonspacescraft"));
     Game.message(
-      "race: "+Person.getForAll("race") + "\nname:" + Person.getForAll("name")
-    )
+      "race: "+Person.getForAll("race") + "\nname:" + Person.getForAll("name") + "\n [DEBUG]: " + JSON.stringify(Person.list)
+    );
+    Game.message(JSON.stringify(Quest.list))
+    alert(Person.getForAll("race"))
 });
 
