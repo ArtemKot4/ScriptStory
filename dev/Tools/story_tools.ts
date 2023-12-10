@@ -1,7 +1,4 @@
-type universal = string | number;
-type int = number;
-type name = string;
-type fraction = "friendly" | "angry" | "neutral";
+
 var dialogs = [];
 var quests = [];
 
@@ -26,11 +23,10 @@ function dialogRegistry(
 
   isActive: boolean,
   talker: number,
-  buttons?: {
-    button_1: ()=>void,
-    button_2: ()=>void,
-    button_3: ()=>void
-  }
+
+    button_1?: {},
+    button_2?: {},
+    button_3?: {}
 ): void {
   dialogs.push({
     dialog: dialog,
@@ -43,6 +39,8 @@ function dialogRegistry(
 
     isActive: isActive,
     talker: talker,
-    buttons: buttons
+    button_1: button_1,
+    button_2: button_2,
+    button_3: button_3
   });
 }

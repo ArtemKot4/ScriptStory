@@ -1,4 +1,11 @@
 var Dialog = new UI.Container();
+
+module UIWorker {
+   export function getPersonModel(): void {
+        
+   }
+}
+
 var DialogWindow = new UI.Window({
   location: {
     x: 0,
@@ -37,6 +44,7 @@ var DialogWindow = new UI.Window({
           dialogs[0]?.buttons.button_1()
           // }
         },
+        
       },
     },
     answer_2: {
@@ -122,8 +130,8 @@ Callback.addCallback("ItemUse", function (coords, item, block) {
   if (item.id == VanillaItemID.stick) {
     Dialog.openAs(DialogWindow);
     // Dialog.openAs(DialogWindow);
-    teleportPlayer(+10, +1, +10);
-    guy.setAttitude("+",10);
+   // teleportPlayer(+10, +1, +10);
+    fluf.setAttitude("+",10);
   };
   if(item.id==VanillaItemID["iron_ingot"]){
     Quest.give("testq")

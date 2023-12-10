@@ -1,5 +1,3 @@
-type qtype = "item" | "mob" | "position" | "dialog";
-
 type IQuestParams = [
   name: name, //name
   name: name, //owner
@@ -22,11 +20,13 @@ class Quest {
     },
   ];
   constructor(description: IQuestParams) {
-    this.description = description;
+    let desc = this.description;
+     desc = description;
 
     Quest.list.push({
       name: this.description[0],
       type: this.description[2].type,
+      target: this.description[2].target,
       isCompleted: this.isCompleted,
       func: this.description[3],
     });
@@ -44,12 +44,13 @@ class Quest {
       for (var q in Quest.list) {
         const desc = Quest.list[q];
         if (
-          Quest.check("item") &&
-          actor.getInventorySlot(i).id == desc.target
+          //Quest.check("item") &&
+          actor.getInventorySlot(i).id == desc.target 
         ) {
           desc.isCompleted = 2;
           Game.message("Квест на предмет успешно выполнен!");
-        }
+          alert("isCompleted level changed to: " + desc.isCompleted)
+        } else {Game.message("Предмет не найден")}
       }
     }
   }
@@ -59,6 +60,7 @@ class Quest {
       if (q.name == name && q.isCompleted == 0) {
         q.isCompleted = 1;
         Game.message("Отлично,квест выдан!");
+        alert("competed level: " + q.isCompleted)
       }
     }
   }
@@ -75,6 +77,6 @@ Callback.addCallback("LocalTick", () => {
       }
     }
 
-    Quest.checkItem();
+  //  if (World.getThreadTime() % 400 == 0)  Quest.checkItem();
   }
 });
