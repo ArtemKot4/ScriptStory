@@ -12,8 +12,9 @@
 		"Tools/translations.ts",
 		"Tools/story_tools.ts",
 		"Tools/quests.ts",
-		"Tools/dialog_window.ts",
 		"Tools/Core/Core.ts",
+		"API/Event.ts",
+		"Tools/dialog_window.ts",
 		"recipes.ts"
 	]
 }

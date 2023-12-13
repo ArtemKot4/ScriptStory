@@ -1,2 +1,2 @@
-const guy = new Person({name: "thomas",age: 20,fraction: "friendly", place: "World",race:"human"});
-const fluf = new Person({name: "fluf", age: 22, fraction: "friendly", place: "World",race:"furry"});
+const guy = new Person({name: "pers",age: 20, place: "desert_plates",race:"human"});
+const fluf = new Person({name: "fluf", age: 22, place: "skyes",race:"furry"});

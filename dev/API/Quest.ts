@@ -67,16 +67,16 @@ class Quest {
 }
 
 Callback.addCallback("LocalTick", () => {
-  if (World.getThreadTime() % 40 == 0) {
-    for (var i in Quest.list) {
-      var q = Quest.list[i];
+  // if (World.getThreadTime() % 40 == 0) {
+  //   for (var i in Quest.list) {
+  //     var q = Quest.list[i];
 
-      if (q.name && q.isCompleted === 2 && q.func) {
-        q.func();
-        q.isCompleted = 3;
-      }
-    }
+  //     if (q.name && q.isCompleted === 2 && q.func) {
+  //       q.func();
+  //       q.isCompleted = 3;
+  //     }
+  //   }
 
   //  if (World.getThreadTime() % 400 == 0)  Quest.checkItem();
-  }
+  //}
 });

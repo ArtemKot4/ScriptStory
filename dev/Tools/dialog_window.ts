@@ -1,4 +1,4 @@
-var Dialog = new UI.Container();
+const Dialog = new UI.Container();
 
 module UIWorker {
    export function getPersonModel(): void {
@@ -6,7 +6,7 @@ module UIWorker {
    }
 }
 
-var DialogWindow = new UI.Window({
+const DialogWindow = new UI.Window({
   location: {
     x: 0,
     y: 0,
@@ -81,13 +81,12 @@ var DialogWindow = new UI.Window({
     },
   },
 });
-function buttonFunc() {}
+
+ 
 Callback.addCallback("LocalTick", function (coords, item, block) {
-  // if (World.getThreadTime() % 160 == 0) {
-  // alert(JSON.stringify(dialogs));
-  // }
+
   for (var i in dialogs) { // var n in quests
-    var dialog = dialogs[i];
+    const dialog = dialogs[i];
     if (World.getThreadTime() % 5 == 0) {
       if (
         dialogs[i].dialog &&
@@ -99,17 +98,7 @@ Callback.addCallback("LocalTick", function (coords, item, block) {
         Dialog.setText("answer_2", "" + dialog.second);
         Dialog.setText("answer_3", "" + dialog.third);
         var d = dialogs[0].talker;
-        // switch (d) {
-        // case 1:
-        // Dialog.setText("Talker", "First");
-        // break;
-        // case 2:
-        // Dialog.setText("Talker", "Second");
-        // case 3:
-        // Dialog.setText("Talker", "Third")
-        // break;
-        // }
-        // alert("Done!");
+    
       }
     }
     if (
@@ -136,7 +125,10 @@ Callback.addCallback("ItemUse", function (coords, item, block) {
   if(item.id==VanillaItemID["iron_ingot"]){
     Quest.give("testq")
     Game.message(JSON.stringify(Quest.list))
-  }
+  };
+  if(item.id==VanillaItemID["gold_ingot"]){
+   test.start();
+  };
 });
 Callback.addCallback("EntityInteract", function (entity, player, coords) {
   if (Entity.getTypeName(entity) == Person.getAll()) {
