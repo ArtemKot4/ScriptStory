@@ -94,13 +94,10 @@ function registerNumeralTranslation() {
 	}
 	for (let i = 0, l = arguments.length; i < l; i += 2) {
 		if (arguments[i].includes("%?")) {
-			const format = Object.assign({}, arguments[i + 1]);
-			for (const key in format) {
-				format[key] = "" + format[key];
-			}
 			for (let i = 2; i <= 4; i++) {
+				const format = Object.assign({}, arguments[i + 1]);
 				for (const key in format) {
-					format[key] = format[key].replace("%?", i);
+					format[key] = ("" + format[key]).replace("%?", i);
 				}
 				Translation.addTranslation(arguments[i].replace("%?", i), format);
 			}
