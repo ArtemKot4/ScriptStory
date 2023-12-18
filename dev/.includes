@@ -6,6 +6,7 @@ registryQuests.ts
 Tools/translations.ts
 Tools/story_tools.ts
 Tools/quests.ts
+Tools/rewards.ts
 Tools/Core/Core.ts
 API/Event.ts
 Tools/dialog_window.ts
