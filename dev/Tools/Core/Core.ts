@@ -4,7 +4,6 @@ IMPORT("StorageInterface");
 IMPORT("ItemAnimHelper");
 IMPORT("BlockEngine");
 IMPORT("SoundAPI");
-
 IMPORT("RenderUtil");
 
 type universal = string | number;
@@ -30,6 +29,8 @@ type parts =
 type race = "furry" | "human";
 
 type place = "desert_plates" | "skyes";
+
+type test<T> = (test: T) => {};
 
 Callback.addCallback("LevelDisplayed", function () {
   Game.message(
