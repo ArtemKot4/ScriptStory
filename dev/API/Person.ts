@@ -1,100 +1,50 @@
-interface IDescription {
-  name: string;
-  age: number;
-  place: place /*Место жительства*/;
-  race: race;
+interface PersonDescriptor {
+  race: race, attitude: 0, place: place, quests: object[], isDead: boolean
 }
-
-let ent = [];
 
 class Person {
-  public static list: any[] = [];
-  public name: name;
-  public age: int;
-  public place: place;
-  public race: race;
-  public attitude = 0;
-  constructor(description: IDescription) {
-    description = {
-      name: this.name,
-      age: this.age,
-      place: this.place,
-      race: this.race,
+  public static data = {}
+  constructor(public name, race: race, place: place) {
+     Person.data[name] = {race: race, attitude: 0, place: place, quests: [], isDead: false, dialogLock: false}
+  };
+  public static addAttitude(name: string, count: int) {
+    if(Person.data[name].attitude >= 100) return;
+        Person.data[name].attitude += count   
+  };
+  public static decreaseAttitude(name: string, count: int) {
+    const attitude = Person.data[name].attitude;
+    if(attitude - count < 0) 
+    return Person.data[name].attitude = Math.abs(count - attitude);
+    Person.data[name].attitude -= count
+  };
+  public static getPersonsByRace(race: race) {
+    const result = [];
+    const data = Person.data as PersonDescriptor[];
+    for(const i in data) {
+      if(data[i].race === race) {
+        result.push(i);
+      }
     };
-    Person.list.push(description, this.attitude);
-    alert("constructor: " + JSON.stringify(description));
-  }
-  public getName(): string {
-    return this.name[0].toUpperCase() + this.name.slice(1).toString();
-  }
-  public static getForAll(info: string): string[] {
-    const infos: string[] = [];
-    for (let i = 0, l = Person.list.length; i < l; i++) {
-      const person = Person.list[i];
-      if (person && person[info]) {
-        infos.push(person[info]);
+    Game.message(String(result));
+    return result;
+  };
+  public dialogUpdatable(ui: UI.Container) {
+    const data = Person.data[this.name];
+    if(!data || data.quests && data.quests.length === 0) {
+      throw new Error("Не получилось получить персонажа в списке или список квестов равен нулю: " + data) }
+      const desc = data.quests[0];
+    return {
+      ui,
+      update: function() {
+         if(ui.isOpened() === false) { 
+          alert("Я уничтожился!");
+          this.remove = true; };
+          ui.setText("Question", desc.question);
+          ui.setText("answer_1", desc.answer_1);
+          ui.setText("answer_2", desc.answer_2);
+          ui.setText("answer_3", desc.answer_3);
+          ui.setText("Talker", this.name.toLowerCase());
       }
     }
-    return infos;
-  }
-  public static getAll(): string {
-    for (var i in Person.list) {
-      return "script_story:" + Person.list[i].name + "<>";
-    }
-  }
-
-  public getInfo(param: information): universal {
-    return this[param];
-  }
-  public setAttitude(type: math_sep, number: int): void {
-    const start = this.attitude + type + number;
-
-    if (this.name && this.attitude < 200 && number <= 20) {
-      this.attitude = eval(start);
-      Game.message(
-        this.name +
-          ": {" +
-          "equals: " +
-          type +
-          number +
-          "\n, attitude: " +
-          this.attitude +
-          "}"
-      );
-      for (var i in Person.list) {
-        const person = Person.list[i];
-        if (person.name == this.name) {
-          Person.list[i].attitude = this.attitude;
-        }
-      }
-    }
-  }
-
-  public completeModel(name: name, type: parts, texture: name) {
-    const dir: string = __dir__ + "person/";
-    const actor: ActorRenderer = new ActorRenderer();
-    const mesh: RenderMesh = new RenderMesh();
-    mesh.importFromFile(dir + "models/" + name, "obj", {
-      invertV: false,
-      noRebuild: false,
-    });
-    actor.addPart(name, type, mesh).setTexture(dir + "textures/" + texture);
-
-    const attach = new AttachableRender(ent[this.name]);
-    attach.setRenderer(actor);
-  }
-
-  public get(): string {
-    return "script_story:" + this.name + "<>";
-  }
-}
-
-
-
-Callback.addCallback("EntityAdded", (entity: int) => {
-  const all: string[] = Person.getForAll("name");
-  if (Entity.getTypeName(entity) == Person.getAll()) {
-    alert(JSON.stringify("Имена мобов получены: " + all));
-    ent.push({ [String(all)]: entity });
-  }
-});
+  };
+};
